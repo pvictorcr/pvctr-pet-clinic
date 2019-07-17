@@ -2,12 +2,10 @@ package pvctr.springframework.petclinic.services.map;
 
 import java.util.Set;
 
-import org.hibernate.sql.Delete;
-
 import pvctr.springframework.petclinic.model.Owner;
-import pvctr.springframework.petclinic.services.CrudService;
+import pvctr.springframework.petclinic.services.OwnerService;
 
-public class OwnerServiceMap extends AbstractMapService<Owner, Long>  implements CrudService<Owner, Long>{
+public class OwnerServiceMap extends AbstractMapService<Owner, Long>  implements OwnerService{
 
 	@Override
 	public Set<Owner> findAll(){
@@ -32,6 +30,11 @@ public class OwnerServiceMap extends AbstractMapService<Owner, Long>  implements
 	@Override
 	public void deleteById(Long id) {
 		this.deleteById(id);
+	}
+
+	@Override
+	public Owner findByLastName(String lastName) {
+		return null;
 	}
 
 }
