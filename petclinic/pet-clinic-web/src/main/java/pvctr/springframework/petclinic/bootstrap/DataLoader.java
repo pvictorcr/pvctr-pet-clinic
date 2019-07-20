@@ -1,9 +1,12 @@
 package pvctr.springframework.petclinic.bootstrap;
 
+import java.time.LocalDate;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import pvctr.springframework.petclinic.model.Owner;
+import pvctr.springframework.petclinic.model.Pet;
 import pvctr.springframework.petclinic.model.PetType;
 import pvctr.springframework.petclinic.model.Vet;
 import pvctr.springframework.petclinic.services.OwnerService;
@@ -25,7 +28,7 @@ public class DataLoader implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-
+		
 		PetType dog = new PetType();
 		dog.setName("Dog");
 		PetType saveDogPetType = petTypeService.save(dog);
@@ -37,12 +40,32 @@ public class DataLoader implements CommandLineRunner {
         Owner owner1 = new Owner();
         owner1.setFirstName("Michael");
         owner1.setLastName("Weston");
-
+        owner1.setAddress("123 Bickerel");
+        owner1.setCity("Miami");
+        owner1.setTelephone("123123123");
+        
+        Pet mikesPet = new Pet();
+        mikesPet.setPetType(saveDogPetType);
+        mikesPet.setOwner(owner1);
+        mikesPet.setBirthDate(LocalDate.now());
+        mikesPet.setName("Rosco");
+        owner1.getPets().add(mikesPet);
+        
         ownerService.save(owner1);
 
         Owner owner2 = new Owner();
         owner2.setFirstName("Fiona");
         owner2.setLastName("Glenanne");
+        owner2.setAddress("123 Bickerel");
+        owner2.setCity("Miami");
+        owner2.setTelephone("123123123");
+        
+        Pet fionasCat = new Pet();
+        fionasCat.setName("Meow");
+        fionasCat.setOwner(owner2);
+        fionasCat.setBirthDate(LocalDate.now());
+        fionasCat.setPetType(saveCatPetType);
+        owner2.getPets().add(fionasCat);
 
         ownerService.save(owner2);
         
